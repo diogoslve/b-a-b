@@ -1,0 +1,195 @@
+Service Catalog Graph-Based Design Platform
+
+Design a modular application that models an organization’s ServiceNow Service Catalog as a graph rather than as a collection of forms or database tables.
+
+Vision
+
+The application is not a ServiceNow development tool. Instead, it is a visual design environment where business analysts, product owners, and service designers can understand the current state of the Service Catalog, propose changes, and generate implementation-ready user stories for a ServiceNow development team.
+
+ServiceNow remains the system of record, while this application becomes the system of design.
+
+Core Concept
+
+The application imports the existing ServiceNow Service Catalog and converts it into a directed graph.
+
+The graph represents the complete catalog structure and relationships, including:
+
+* Catalogs
+* Categories
+* Catalog Items
+* Variable Sets
+* Variables
+* Choices
+* UI Policies (future)
+* Approvals (future)
+* Workflows (future)
+* Dependencies between components
+
+Nodes represent entities.
+
+Edges represent relationships such as:
+
+* contains
+* belongs_to
+* uses
+* depends_on
+* reveals
+* requires
+* references
+
+The graph is the canonical representation of the catalog inside the application.
+
+User Experience
+
+Users interact with the graph through a visual drag-and-drop interface.
+
+They should be able to:
+
+* Browse the existing catalog
+* Navigate relationships
+* Expand and collapse branches
+* Search for existing components
+* Reuse existing components
+* Create new components
+* Modify existing components
+* Move components to different parents
+* Rename components
+* Remove components
+* Replace relationships
+* Clone existing structures
+* Compare alternative designs before committing changes
+
+The interface should make the catalog feel like a living design model rather than a collection of forms.
+
+Editing Operations
+
+All user actions are represented as graph operations.
+
+Examples include:
+
+Create:
+
+* Add Catalog
+* Add Category
+* Add Catalog Item
+* Add Variable
+* Add Variable Set
+* Add Choice
+
+Modify:
+
+* Rename nodes
+* Edit properties
+* Change parent relationships
+* Attach or detach Variable Sets
+* Change variable order
+* Update choice values
+* Modify dependencies
+
+Delete:
+
+* Remove variables
+* Remove variable sets
+* Remove catalog items
+* Remove categories
+* Remove relationships
+* Mark components for retirement
+
+Reuse:
+
+* Reuse Variable Sets
+* Reuse Variables
+* Clone Catalog Items
+* Copy existing structures
+
+Every change should be tracked as a graph transformation.
+
+Graph Versioning
+
+The imported ServiceNow catalog becomes the baseline graph.
+
+User changes create a working graph.
+
+The application continuously computes the difference between:
+
+Current Graph
+vs
+Proposed Graph
+
+The resulting graph diff becomes the source for implementation artifacts.
+
+Change Analysis
+
+The application should clearly identify:
+
+New components
+
+Modified components
+
+Removed components
+
+Moved components
+
+Reused components
+
+Relationship changes
+
+Dependency changes
+
+Nothing should be inferred; every change should be explicitly represented.
+
+Outputs
+
+The primary output is not deployment.
+
+The primary output is documentation for implementation teams.
+
+Outputs include:
+
+* User Stories
+* Acceptance Criteria
+* Change Summary
+* Impact Summary
+* Visual Graph Diff
+* Architecture Diagrams
+* Exportable Graph JSON
+
+User Story Generation
+
+Every graph operation maps to one or more implementation-ready user stories.
+
+Examples:
+
+Adding a Catalog Item generates a story to create the new item.
+
+Renaming a Variable generates a story describing the update.
+
+Removing a Variable Set generates a story describing its retirement and any affected catalog items.
+
+Moving a Catalog Item between categories generates a story describing the structural change.
+
+The generated stories should be deterministic and based entirely on graph differences rather than AI inference.
+
+Architecture
+
+The system should be modular and composed of:
+
+1. ServiceNow Catalog Extractor
+2. Graph Builder
+3. Graph Repository
+4. Visual Graph Editor
+5. Graph Diff Engine
+6. Change Analyzer
+7. User Story Generator
+8. Documentation Exporter
+
+Each module should be independently replaceable.
+
+Design Principles
+
+* The graph is the single source of truth.
+* Every edit is represented as a graph transformation.
+* Existing structures should be reusable rather than duplicated.
+* The application should support additions, modifications, moves, reuse, and removals equally well.
+* Implementation is intentionally outside the scope of the application.
+* The focus is on planning, visualization, governance, and producing implementation-ready change requests for the ServiceNow development team.
